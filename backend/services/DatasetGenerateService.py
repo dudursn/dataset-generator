@@ -3,7 +3,7 @@ from models.TrainingSet import TrainingSet
 from models.Conversation import Conversation
 from models.LabelClassification import LabelClassification
 
-class Generate:
+class DatasetGenerateService:
     
     def __init__(self, number_of_samples):
         self.training_set = TrainingSet(number_of_samples)

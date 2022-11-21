@@ -1,18 +1,20 @@
 # save this as app.py
 from flask import Flask, jsonify
-from generate import Generate
+from services.DatasetGenerateService import DatasetGenerateService
+import flask
 
-app = Flask(__name__)
+app = Flask('dataset_generator')
 
-app.debug = True
 
 @app.route("/")
 def hello():
-    return "Hello, World!"
+    return f'Hello, World! - This is application is running with <b>Flask Version: %s</b>' % flask.__version__
 
+@app.route("/generate")
 @app.route("/generate/<int:number_of_samples>")
-def generate_dataset(number_of_samples):
-    # generate a dataset with number_of_samples
-    g = Generate(number_of_samples)
+def generate_dataset(number_of_samples=5):
+
+    # generate a dataset with number of samples
+    g = DatasetGenerateService(number_of_samples)
     result = g.run()
-    return result
+    return jsonify(result)
