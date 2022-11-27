@@ -47,18 +47,18 @@ export class TrainingSet {
      * @param TrainingSets an array of TrainingSet
      * @returns an array of new TrainingSet
      */
-    public static getTrainingSets(conversations: Conversation[]): TrainingSet {
+    public static getTrainingSets(results: any[]): TrainingSet {
   
         const conversationArray = new Array<Conversation>();
-
-        conversations.forEach((trainingSet) => {
-            if (trainingSet !== null) {
-                let label = new LabelClassification(trainingSet['label_classification']['name'], trainingSet['label_classification']['initials']);
-                let conversation = new Conversation(trainingSet['code'], trainingSet['conversation'], label);
+        console.log();
+        results['data'].forEach((result) => {
+            if (result !== null) {
+                let label = new LabelClassification(result['label_classification']['name'], result['label_classification']['initials']);
+                let conversation = new Conversation(result['code'], result['conversation'], label);
                 conversationArray.push(Conversation.getConversation(conversation));
             }
         });
 
-        return new TrainingSet(conversationArray, conversationArray.length);
+        return new TrainingSet(conversationArray, results['total']);
     }
 }

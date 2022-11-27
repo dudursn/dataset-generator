@@ -35,14 +35,12 @@ export class GenerateService {
    */
   public getTrainDataset(totalSamples: number): Observable<TrainingSet> {
 
-    console.log('GenerateService.ngOnInit()');
     return new Observable<TrainingSet>((data) => {
       this.httpClient
-        .get<Conversation[]>(`${this.apiURL}/${totalSamples}`)
+        .get<any[]>(`${this.apiURL}/${totalSamples}`)
         .subscribe({
-          next: (conversations) => {
-            console.log(conversations);
-            data.next(TrainingSet.getTrainingSets(conversations));
+          next: (result) => {
+            data.next(TrainingSet.getTrainingSets(result));
           },
           error: (error) => {
             data.error(error);

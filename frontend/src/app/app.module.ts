@@ -7,7 +7,8 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ComponentsModule } from './components/components.module';
-import { EnvironmentService } from './services/environment/environment.service';
+import { AppCommonModule } from './lib/app-common/app-common.module';
+import { environment } from 'environments/environment';
 
 @NgModule({
   imports: [
@@ -18,12 +19,13 @@ import { EnvironmentService } from './services/environment/environment.service';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    AppCommonModule.forRoot(environment),
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [EnvironmentService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

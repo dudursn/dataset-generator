@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('HomeComponent.ngOnInit()');
     this.loadData();
   }
 
@@ -48,7 +47,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadData() {
     this.generateService.getTrainDataset(10).subscribe( (data) => {
       this.data = data;
+      console.log(data);
     });     
+
   }
 
 
