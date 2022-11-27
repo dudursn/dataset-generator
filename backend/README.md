@@ -16,6 +16,7 @@
 - PyTest v7.2
 - Coverage v6.5
 - Pytest-cov v4.0
+- Flask-cors v3.0.10
 
 ### Prerequisites
 - Python 3.10.7
