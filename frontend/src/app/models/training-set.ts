@@ -1,4 +1,5 @@
 import { Conversation } from "./conversation";
+import { LabelClassification } from "./label-classification";
 
 /**
  * Represents the training dataset.
@@ -46,15 +47,18 @@ export class TrainingSet {
      * @param TrainingSets an array of TrainingSet
      * @returns an array of new TrainingSet
      */
-    public static getTrainingSets(TrainingSets: TrainingSet[]): Array<TrainingSet> {
-        const trainingSetArray = new Array<TrainingSet>();
+    public static getTrainingSets(conversations: Conversation[]): TrainingSet {
+  
+        const conversationArray = new Array<Conversation>();
 
-        TrainingSets.forEach((trainingSet) => {
-        if (trainingSet !== null) {
-            trainingSetArray.push(TrainingSet.getTrainingSet(trainingSet));
-        }
+        conversations.forEach((trainingSet) => {
+            if (trainingSet !== null) {
+                let label = new LabelClassification(trainingSet['label_classification']['name'], trainingSet['label_classification']['initials']);
+                let conversation = new Conversation(trainingSet['code'], trainingSet['conversation'], label);
+                conversationArray.push(Conversation.getConversation(conversation));
+            }
         });
 
-        return trainingSetArray;
+        return new TrainingSet(conversationArray, conversationArray.length);
     }
 }

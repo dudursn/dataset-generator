@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { HomeComponent } from 'app/home/home.component';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -14,6 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { ComponentsModule } from 'app/components/components.module';
+import { GenerateService } from 'app/services/generate.service';
+import { EnvironmentService } from 'app/services/environment/environment.service';
 
 @NgModule({
   imports: [
@@ -31,8 +32,8 @@ import { ComponentsModule } from 'app/components/components.module';
   ],
   declarations: [
     HomeComponent,
-    DashboardComponent,    
-  ]
+  ],
+  providers: [GenerateService, EnvironmentService],
 })
 
 export class AdminLayoutModule {}

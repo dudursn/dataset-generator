@@ -69,7 +69,53 @@
                 </div>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Generate Dataset</h4>
+                        <p class="card-category">Click "Go" to generate a dataset to train conversational systems</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-8">
+                                
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Dataset" value= "RDF-Dataset/Test/generate" type="text" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Total Samples to generate" value="10" type="number">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right">Go</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="navbar-form">
+                    <div class="input-group no-border">
+                        <input type="text" value="" class="form-control" placeholder="Search...">
+                        <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <i class="material-icons">search</i>
+                            <div class="ripple-container"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <app-table></app-table>
+
     </div>
 </div>
   

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ComponentsModule } from './components/components.module';
+import { EnvironmentService } from './services/environment/environment.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { ComponentsModule } from './components/components.module';
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [],
+  providers: [EnvironmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
