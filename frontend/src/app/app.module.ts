@@ -4,10 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { GenerateDatasetComponent } from './generate-dataset/generate-dataset.component';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   imports: [
@@ -22,8 +21,6 @@ import { GenerateDatasetComponent } from './generate-dataset/generate-dataset.co
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    GenerateDatasetComponent,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
