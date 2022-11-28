@@ -17,6 +17,11 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   data: TrainingSet;
 
+  /**
+   * The list of data filtered.
+   */
+  dataAux: TrainingSet;
+
    /**
    * The dataset's name
    */
@@ -28,10 +33,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   numberOfSamples: number;
 
   /**
+   * The search to filter the data by utterance.
+   */
+  searchString: string;
+
+  /**
    * The columns names to fill table.
    */
   columns: string[];
-
 
   /**
    * Constructor.
@@ -40,8 +49,12 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   constructor( private generateService: GenerateService) {
     this.data = new TrainingSet([], 0);
+    this.dataAux = this.data;
   }
 
+  /**
+   * Life cycle hook. Called when a directive, pipe, or service is initialized.
+   */
   ngOnInit(): void {
     this.datasetName = "RDF-Dataset/Test/generate";
     this.numberOfSamples = 5;
@@ -50,8 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle hook. Called when a directive, pipe, or service is destroyed.
-   *
-   * Unsubscribes from all library services.
    */
   ngOnDestroy(): void {
     
@@ -63,16 +74,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   getData() {
     this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
       this.data = data;
-      console.log(data);
+      this.dataAux = Object.assign({}, this.data);
     });     
 
   }
 
+  /**
+   * Bind click event to generate dataset for training conversational systems.
+   */
   onClickSubmit(data) {
     this.numberOfSamples = data.numberOfSamples;
     this.getData();
   }
 
+   /**
+   * Bind click event to filter dataset for training conversational systems.
+   */
+  onClickFilterSearch(data) {
+    this.dataAux.utterances = this._filterItems(this.data.utterances, data.searchString);
+  }
+
+  /**
+   * Export to csv the dataset generated for training conversational systems.
+   */
   exportCSV() { 
     if(this.numberOfSamples > 0 && this.data.utterances.length > 0) {
       let utterances = this.data.utterances;
@@ -97,10 +121,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Clear the data generated.
+   */
   clearSearch() {
-    this.data = new TrainingSet([], 0);
+    //this.data = new TrainingSet([], 0);
+    this.dataAux = Object.assign({}, this.data);
+    this.searchString = "";
     console.log('clear');
   } 
+
+  _filterItems(arr, query) {
+    return arr.filter((el) => el.utterance.toLowerCase().includes(query.toLowerCase()));
+  }
 
 
 }
