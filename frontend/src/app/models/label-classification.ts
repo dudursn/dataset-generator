@@ -1,6 +1,6 @@
 
 /**
- * Represents the label classification for a conversation.
+ * Represents the label classification for a utterance.
  */
 export class LabelClassification {
     /**
@@ -18,7 +18,7 @@ export class LabelClassification {
      * @param name the label lassification's name
      * @param initials the label lassification's initials
      */
-    constructor(name : string, initials : string) {
+    constructor(name : string = "", initials : string = "") {
         this.name = name;
         this.initials = initials;
     }
@@ -34,6 +34,13 @@ export class LabelClassification {
             labelClassification.name,
             labelClassification.initials,
         );
+    }
+
+     /**
+     * Returns a string name formatted for Label classification.
+     */
+    getLabelClassificationName(): string {
+        return this.initials + " - " + this.name;
     }
 
 

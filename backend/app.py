@@ -2,9 +2,10 @@
 from flask import Flask, jsonify
 from services.DatasetGenerateService import DatasetGenerateService
 import flask
+from flask_cors import CORS
 
 app = Flask('dataset_generator')
-
+CORS(app)
 
 @app.route("/")
 def hello():

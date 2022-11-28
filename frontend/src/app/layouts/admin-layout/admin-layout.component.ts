@@ -104,41 +104,13 @@ export class AdminLayoutComponent implements OnInit {
           $(this).parent('li').addClass('active');
 
 
-          var new_image = $(this).find("img").attr('src');
-
-          if($sidebar_img_container.length !=0 ){
-              $sidebar_img_container.fadeOut('fast', function(){
-                 $sidebar_img_container.css('background-image','url("' + new_image + '")');
-                 $sidebar_img_container.fadeIn('fast');
-              });
-          }
-
-          if($full_page_background.length != 0){
-
-              $full_page_background.fadeOut('fast', function(){
-                 $full_page_background.css('background-image','url("' + new_image + '")');
-                 $full_page_background.fadeIn('fast');
-              });
-          }
-
-          if($sidebar_responsive.length != 0){
-              $sidebar_responsive.css('background-image','url("' + new_image + '")');
-          }
+      
       });
   }
   ngAfterViewInit() {
       this.runOnRouteChange();
   }
-  isMaps(path){
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      titlee = titlee.slice( 1 );
-      if(path == titlee){
-          return false;
-      }
-      else {
-          return true;
-      }
-  }
+ 
   runOnRouteChange(): void {
     if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
       const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');

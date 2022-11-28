@@ -1,12 +1,13 @@
 // See Copyright Notice in the LICENSE file for details
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Utterance } from 'app/models/utterance';
 import { TrainingSet } from 'app/models/training-set';
 import { Observable } from 'rxjs';
 import { EnvironmentService } from './environment/environment.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GenerateService {
 
@@ -23,21 +24,23 @@ export class GenerateService {
    */
   constructor(private httpClient: HttpClient, private environmentService: EnvironmentService) {
     this.apiURL = this.environmentService.getValue('apiUrl') + '/generate';
+    console.log(this.apiURL);
   }
 
   /**
    * Retrieves the dataset generated for training conversational systems.
    *
-   * @param totalSamples the total number of conversations to be generated 
+   * @param totalSamples the total number of utterances to be generated 
    * @returns an Observable of TrainingSets array
    */
-   public getTrainDataset(totalSamples: number): Observable<TrainingSet[]> {
-    return new Observable<TrainingSet[]>((data) => {
+  public getTrainDataset(totalSamples: number): Observable<TrainingSet> {
+
+    return new Observable<TrainingSet>((data) => {
       this.httpClient
-        .get<TrainingSet[]>(`${this.apiURL}/${totalSamples}`)
+        .get<any[]>(`${this.apiURL}/${totalSamples}`)
         .subscribe({
-          next: (trainingSets) => {
-            data.next(TrainingSet.getTrainingSets(trainingSets));
+          next: (result) => {
+            data.next(TrainingSet.getTrainingSets(result));
           },
           error: (error) => {
             data.error(error);

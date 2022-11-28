@@ -1,4 +1,5 @@
-import { Conversation } from "./conversation";
+import { Utterance } from "./utterance";
+import { LabelClassification } from "./label-classification";
 
 /**
  * Represents the training dataset.
@@ -7,23 +8,23 @@ export class TrainingSet {
 
     
     /**
-     * Array of conversations in training dataset.
+     * Array of utterances in training dataset.
      */
-    conversations : Conversation[];
+    utterances : Utterance[];
 
     /**
-     * Total number of conversations in training dataset.
+     * Total number of utterances in training dataset.
      */
     numberOfSamples : number;
 
     /**
      * Constructor.
      *
-     * @param conversations the array of conversations in training dataset
-     * @param numberOfSamples total number of conversations in training dataset
+     * @param utterances the array of utterances in training dataset
+     * @param numberOfSamples total number of utterances in training dataset
      */
-    constructor(conversations : Conversation[], numberOfSamples : number) {
-        this.conversations = conversations;
+    constructor(utterances : Utterance[], numberOfSamples : number) {
+        this.utterances = utterances;
         this.numberOfSamples = numberOfSamples;
     }
 
@@ -35,7 +36,7 @@ export class TrainingSet {
      */
     public static getTrainingSet(trainingSet: TrainingSet): TrainingSet {
         return new TrainingSet(
-            trainingSet.conversations,
+            trainingSet.utterances,
             trainingSet.numberOfSamples,
         );
     }
@@ -46,15 +47,18 @@ export class TrainingSet {
      * @param TrainingSets an array of TrainingSet
      * @returns an array of new TrainingSet
      */
-    public static getTrainingSets(TrainingSets: TrainingSet[]): Array<TrainingSet> {
-        const trainingSetArray = new Array<TrainingSet>();
-
-        TrainingSets.forEach((trainingSet) => {
-        if (trainingSet !== null) {
-            trainingSetArray.push(TrainingSet.getTrainingSet(trainingSet));
-        }
+    public static getTrainingSets(results: any[]): TrainingSet {
+  
+        const utteranceArray = new Array<Utterance>();
+        console.log();
+        results['data'].forEach((result) => {
+            if (result !== null) {
+                let label = new LabelClassification(result['label_classification']['name'], result['label_classification']['initials']);
+                let utterance = new Utterance(result['code'], result['utterance'], label);
+                utteranceArray.push(Utterance.getConversation(utterance));
+            }
         });
 
-        return trainingSetArray;
+        return new TrainingSet(utteranceArray, results['total']);
     }
 }

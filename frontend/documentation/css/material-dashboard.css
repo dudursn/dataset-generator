@@ -13047,6 +13047,12 @@ h2.title {
     background-color: #9c27b0;
     -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
             box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4); }
+
+  .sidebar[data-color="default-color"] li.active > a {
+    background-color: #4F80E1;
+    -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+            box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4); }
+
   .sidebar[data-color="azure"] li.active > a {
     background-color: #00bcd4;
     -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
@@ -13283,6 +13289,9 @@ h2.title {
 .fixed-plugin .badge.active,
 .fixed-plugin .badge:hover {
   border-color: #00bbff; }
+
+.fixed-plugin .badge-default-color {
+    background-color: #4F80E1; }
 
 .fixed-plugin .badge-black {
   background-color: #000; }
@@ -14049,6 +14058,19 @@ a[aria-expanded="true"] .caret,
 .full-page[filter-color="purple"].lock-page .form-group .form-control, .full-page[filter-color="primary"].lock-page .form-group .form-control {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#9c27b0), to(#9c27b0)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
   background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2); }
+
+.full-page[filter-color="default-color"]:after, .full-page[filter-color="primary"]:after {
+  background: rgba(225, 190, 231, 0.56);
+  /* For browsers that do not support gradients */
+  /* For Safari 5.1 to 6.0 */
+  /* For Opera 11.1 to 12.0 */
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(60deg, rgba(225, 190, 231, 0.56), rgba(186, 104, 200, 0.95));
+  /* Standard syntax */ }
+
+.full-page[filter-color="default-color"].lock-page .form-group .form-control, .full-page[filter-color="primary"].lock-page .form-group .form-control {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4F80E1), to(#4F80E1)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
+  background-image: linear-gradient(#4F80E1, #4F80E1), linear-gradient(#D2D2D2, #D2D2D2); }
 
 .full-page[filter-color="blue"]:after, .full-page[filter-color="info"]:after {
   background: rgba(178, 235, 242, 0.56);
