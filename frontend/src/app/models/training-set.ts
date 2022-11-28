@@ -1,4 +1,4 @@
-import { Conversation } from "./conversation";
+import { Utterance } from "./utterance";
 import { LabelClassification } from "./label-classification";
 
 /**
@@ -8,23 +8,23 @@ export class TrainingSet {
 
     
     /**
-     * Array of conversations in training dataset.
+     * Array of utterances in training dataset.
      */
-    conversations : Conversation[];
+    utterances : Utterance[];
 
     /**
-     * Total number of conversations in training dataset.
+     * Total number of utterances in training dataset.
      */
     numberOfSamples : number;
 
     /**
      * Constructor.
      *
-     * @param conversations the array of conversations in training dataset
-     * @param numberOfSamples total number of conversations in training dataset
+     * @param utterances the array of utterances in training dataset
+     * @param numberOfSamples total number of utterances in training dataset
      */
-    constructor(conversations : Conversation[], numberOfSamples : number) {
-        this.conversations = conversations;
+    constructor(utterances : Utterance[], numberOfSamples : number) {
+        this.utterances = utterances;
         this.numberOfSamples = numberOfSamples;
     }
 
@@ -36,7 +36,7 @@ export class TrainingSet {
      */
     public static getTrainingSet(trainingSet: TrainingSet): TrainingSet {
         return new TrainingSet(
-            trainingSet.conversations,
+            trainingSet.utterances,
             trainingSet.numberOfSamples,
         );
     }
@@ -49,16 +49,16 @@ export class TrainingSet {
      */
     public static getTrainingSets(results: any[]): TrainingSet {
   
-        const conversationArray = new Array<Conversation>();
+        const utteranceArray = new Array<Utterance>();
         console.log();
         results['data'].forEach((result) => {
             if (result !== null) {
                 let label = new LabelClassification(result['label_classification']['name'], result['label_classification']['initials']);
-                let conversation = new Conversation(result['code'], result['conversation'], label);
-                conversationArray.push(Conversation.getConversation(conversation));
+                let utterance = new Utterance(result['code'], result['utterance'], label);
+                utteranceArray.push(Utterance.getConversation(utterance));
             }
         });
 
-        return new TrainingSet(conversationArray, results['total']);
+        return new TrainingSet(utteranceArray, results['total']);
     }
 }

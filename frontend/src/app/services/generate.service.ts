@@ -1,7 +1,7 @@
 // See Copyright Notice in the LICENSE file for details
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Conversation } from 'app/models/conversation';
+import { Utterance } from 'app/models/utterance';
 import { TrainingSet } from 'app/models/training-set';
 import { Observable } from 'rxjs';
 import { EnvironmentService } from './environment/environment.service';
@@ -30,7 +30,7 @@ export class GenerateService {
   /**
    * Retrieves the dataset generated for training conversational systems.
    *
-   * @param totalSamples the total number of conversations to be generated 
+   * @param totalSamples the total number of utterances to be generated 
    * @returns an Observable of TrainingSets array
    */
   public getTrainDataset(totalSamples: number): Observable<TrainingSet> {

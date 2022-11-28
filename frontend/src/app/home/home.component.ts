@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TrainingSet } from 'app/models/training-set';
 import { GenerateService } from 'app/services/generate.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +11,25 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
 
   /**
-   * The list of data.
+   * The list of data generated.
    */
   data: TrainingSet;
 
-  subscription: Subscription;
+   /**
+   * The dataset's name
+   */
+  datasetName: string;
+  
+  /**
+   * The number of samples to be generated.
+   */
+  numberOfSamples: number;
+
+  /**
+   * The columns names to fill table.
+   */
+  columns: string[];
+
 
   /**
    * Constructor.
@@ -24,12 +37,13 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @param generateService provides an interface for accessing the training set generated for training conversational systems
    */
   constructor( private generateService: GenerateService) {
-    this.subscription = new Subscription();
-    //this.data = new TrainingSet([], 0);
+    this.data = new TrainingSet([], 0);
   }
 
   ngOnInit(): void {
-    this.loadData();
+    this.datasetName = "RDF-Dataset/Test/generate";
+    this.numberOfSamples = 5;
+    this.columns = ["Code", "Utterance", "Label Classification"];
   }
 
   /**
@@ -44,12 +58,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Loads the dataset generated for training conversational systems.
    */
-  loadData() {
-    this.generateService.getTrainDataset(10).subscribe( (data) => {
+  getData() {
+    this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
       this.data = data;
       console.log(data);
     });     
 
+  }
+
+  onClickSubmit(data) {
+    this.numberOfSamples = data.numberOfSamples;
+    this.getData();
   }
 
 
