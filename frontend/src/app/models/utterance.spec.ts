@@ -1,6 +1,6 @@
-import { Utterance } from './conversation';
+import { Utterance } from "./utterance";
 
-describe('Conversation', () => {
+describe('Utterance', () => {
   it('should create an instance', () => {
     expect(new Utterance()).toBeTruthy();
   });
