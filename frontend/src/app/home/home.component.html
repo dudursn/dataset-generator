@@ -1,75 +1,5 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">content_copy</i>
-                        </div>
-                        <p class="card-category">Used Space</p>
-                        <h3 class="card-title">49/50
-                            <small>GB</small>
-                        </h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons text-danger">warning</i>
-                            <a href="javascript:void(0)">Get More Space...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">store</i>
-                        </div>
-                        <p class="card-category">Revenue</p>
-                        <h3 class="card-title">$34,245</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">date_range</i> Last 24 Hours
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-danger card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">info_outline</i>
-                        </div>
-                        <p class="card-category">Fixed Issues</p>
-                        <h3 class="card-title">75</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">local_offer</i> Tracked from Github
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header card-header-info card-header-icon">
-                        <div class="card-icon">
-                            <i class="fa fa-twitter"></i>
-                        </div>
-                        <p class="card-category">Followers</p>
-                        <h3 class="card-title">+245</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i> Just Updated
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <div class="container-fluid">       
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -102,24 +32,73 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form class="navbar-form">
-                    <div class="input-group no-border">
-                        <input type="text" value="" class="form-control" placeholder="Search...">
-                        <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
-                            <i class="material-icons">search</i>
-                            <div class="ripple-container"></div>
-                        </button>
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Filters</h4>
+                        <p class="card-category">Click to filter a dataset generated</p>
                     </div>
-                    <div class="input-group no-border">
-                        <button (click)="exportCSV()" mat-raised-button class="btn btn-success pull-right" style="margin-right:10px" >Export CSV</button>
-                        <button (click)="clearSearch()" mat-raised-button class="btn btn-danger pull-right" >Clear</button>
-                        <div class="clearfix"></div>
+                    <div class="card-body">
+                        <form class="navbar-form" #filterSearchForm="ngForm" (ngSubmit)="onClickFilterSearch(filterSearchForm.value)">
+                            <div class="input-group no-border">
+                                <div class="col-md-8">
+                                    <input type="text" value="" class="form-control" placeholder="Filter by utterance..." name="searchString" [(ngModel)]="searchString">
+                                </div>
+
+                                <div class="col-md-4">
+                             
+                                    <select class="form-control" id="selectLabelClassification"
+                                        name="selectedLabelClassification" [(ngModel)]="selectedLabelClassification">
+                                        <option value="" [selected]="">--Filter by Label Classification--</option>
+                                        <option value="{{labelClassification.initials}}" *ngFor="let labelClassification of labelClassifications">
+                                            {{labelClassification.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <button mat-raised-button type="submit" class="btn btn-primary pull-right" value="submit">Search</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <button (click)="exportCSV()" mat-raised-button class="btn btn-warning pull-right" style="margin-right:10px">
+                                <i class="material-icons">download</i>Export CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons"></i>Export data to csv
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <button (click)="clearSearch()" mat-raised-button class="btn btn-danger pull-right" >
+                                <i class="material-icons">cancel</i>Clear
+                            </button>
+                            
+                        </div>
+                       
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons"></i> Clear filter
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <app-table [dataSource]="data" [columnNames]="columns"  ></app-table>
+      
+        <app-table [dataSource]="dataAux" [columnNames]="columns"  ></app-table>
 
     </div>
 </div>

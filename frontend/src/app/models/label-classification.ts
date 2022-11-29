@@ -43,5 +43,25 @@ export class LabelClassification {
         return this.initials + " - " + this.name;
     }
 
+    /**
+     * Returns an {@link Array} of new {@link LabelClassification} objects.
+     *
+     * @param LabelClassifications an array of LabelClassification
+     * @returns an array of new LabelClassification
+     */
+     public static getLabelClassifications(results: any[]): Array<LabelClassification> {
+  
+        const labelClassificationArray = new Array<LabelClassification>();
+
+        results['data'].forEach((result) => {
+            if (result !== null) {
+                let label = new LabelClassification(result['name'], result['initials']);
+                labelClassificationArray.push(label);
+            }
+        });
+
+        return labelClassificationArray;
+    }
+
 
 }

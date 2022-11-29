@@ -24,7 +24,6 @@ export class GenerateService {
    */
   constructor(private httpClient: HttpClient, private environmentService: EnvironmentService) {
     this.apiURL = this.environmentService.getValue('apiUrl') + '/generate';
-    console.log(this.apiURL);
   }
 
   /**
@@ -35,18 +34,18 @@ export class GenerateService {
    */
   public getTrainDataset(totalSamples: number): Observable<TrainingSet> {
 
-    return new Observable<TrainingSet>((data) => {
+    return new Observable<TrainingSet>((subscriber) => {
       this.httpClient
         .get<any[]>(`${this.apiURL}/${totalSamples}`)
         .subscribe({
           next: (result) => {
-            data.next(TrainingSet.getTrainingSets(result));
+            subscriber.next(TrainingSet.getTrainingSets(result));
           },
           error: (error) => {
-            data.error(error);
+            subscriber.error(error);
           },
           complete: () => {
-            data.complete();
+            subscriber.complete();
           }
         });
     });
