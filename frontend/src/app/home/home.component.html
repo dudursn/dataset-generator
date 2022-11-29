@@ -32,33 +32,41 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form class="navbar-form" #filterSearchForm="ngForm" (ngSubmit)="onClickFilterSearch(filterSearchForm.value)">
-                    <div class="input-group no-border">
-                        <div class="col-md-12">
-                            <input type="text" value="" class="form-control" placeholder="Filter by utterance..." name="searchString" [(ngModel)]="searchString">
-                            <button mat-raised-button type="submit"  class="btn btn-white btn-round btn-just-icon">
-                                <i class="material-icons">search</i>
-                                <div class="ripple-container"></div>
-                            </button>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label for="exampleFormControlSelect1">Filter by label</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option> Select a option</option>
-                                <option> SELF EXPLANATORY</option>
-                                <option> FIRST TOPIC</option>
-                                <option> PREVIOUS TOPIC</option>
-                            </select>
-                        </div>
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Filters</h4>
+                        <p class="card-category">Click to filter a dataset generated</p>
                     </div>
-                </form>
+                    <div class="card-body">
+                        <form class="navbar-form" #filterSearchForm="ngForm" (ngSubmit)="onClickFilterSearch(filterSearchForm.value)">
+                            <div class="input-group no-border">
+                                <div class="col-md-8">
+                                    <input type="text" value="" class="form-control" placeholder="Filter by utterance..." name="searchString" [(ngModel)]="searchString">
+                                </div>
+
+                                <div class="col-md-4">
+                             
+                                    <select class="form-control" id="selectLabelClassification"
+                                        name="selectedLabelClassification" [(ngModel)]="selectedLabelClassification">
+                                        <option value="" [selected]="">--Filter by Label Classification--</option>
+                                        <option value="{{labelClassification.initials}}" *ngFor="let labelClassification of labelClassifications">
+                                            {{labelClassification.name}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <button mat-raised-button type="submit" class="btn btn-primary pull-right" value="submit">Search</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
-                    <div class="card-header card-header-success card-header-icon">
+                    <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
-                            <button (click)="exportCSV()" mat-raised-button class="btn btn-success pull-right" style="margin-right:10px">
+                            <button (click)="exportCSV()" mat-raised-button class="btn btn-warning pull-right" style="margin-right:10px">
                                 <i class="material-icons">download</i>Export CSV
                             </button>
                         </div>

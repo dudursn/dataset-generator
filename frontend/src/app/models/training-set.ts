@@ -50,7 +50,7 @@ export class TrainingSet {
     public static getTrainingSets(results: any[]): TrainingSet {
   
         const utteranceArray = new Array<Utterance>();
-        console.log();
+
         results['data'].forEach((result) => {
             if (result !== null) {
                 let label = new LabelClassification(result['label_classification']['name'], result['label_classification']['initials']);

@@ -2,14 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LabelClassification } from 'app/models/label-classification';
 import { TrainingSet } from 'app/models/training-set';
 import { GenerateService } from 'app/services/generate.service';
+import { LabelClassificationService } from 'app/services/label-classification.service';
 import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [GenerateService],
+  providers: [GenerateService, LabelClassificationService],
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
 
   /**
@@ -21,6 +23,11 @@ export class HomeComponent implements OnInit, OnDestroy {
    * The list of data filtered.
    */
   dataAux: TrainingSet;
+
+  /**
+   * Array with all labels classifications in dataset.
+   */
+  labelClassifications: LabelClassification[];
 
    /**
    * The dataset's name
@@ -36,6 +43,10 @@ export class HomeComponent implements OnInit, OnDestroy {
    * The search to filter the data by utterance.
    */
   searchString: string;
+  /**
+   * The selected option to filter the data by label Classification.
+   */
+  selectedLabelClassification: string = "";
 
   /**
    * The columns names to fill table.
@@ -46,8 +57,9 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Constructor.
    *
    * @param generateService provides an interface for accessing the training set generated for training conversational systems
+   * @param labelClassificationService provides an interface for accessing all labels classifications in dataset
    */
-  constructor( private generateService: GenerateService) {
+  constructor(private generateService: GenerateService, private labelClassificationService: LabelClassificationService) { 
     this.data = new TrainingSet([], 0);
     this.dataAux = this.data;
   }
@@ -59,6 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.datasetName = "RDF-Dataset/Test/generate";
     this.numberOfSamples = 5;
     this.columns = ["Code", "Utterance", "Label Classification"];
+    this.getLabelsClassificationForCombobox();
   }
 
   /**
@@ -71,27 +84,36 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Loads the dataset generated for training conversational systems.
    */
-  getData() {
+  getDataGenerated() {
     this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
       this.data = data;
       this.dataAux = Object.assign({}, this.data);
-    });     
+    });      
+  }
 
+   /**
+   * Loads all labels classifications for fill the selectbox.
+   */
+  getLabelsClassificationForCombobox() {
+    this.labelClassificationService.getLabelClassifications().subscribe( (data) => {
+      this.labelClassifications = data;
+    });   
   }
 
   /**
    * Bind click event to generate dataset for training conversational systems.
    */
-  onClickSubmit(data) {
-    this.numberOfSamples = data.numberOfSamples;
-    this.getData();
+  onClickSubmit(dataForm) {
+    this.numberOfSamples = dataForm.numberOfSamples;
+    this.getDataGenerated();
   }
 
    /**
    * Bind click event to filter dataset for training conversational systems.
    */
-  onClickFilterSearch(data) {
-    this.dataAux.utterances = this._filterItems(this.data.utterances, data.searchString);
+  onClickFilterSearch(dataForm) {
+    console.log(dataForm);
+    this.dataAux.utterances = this._filterItems(this.data.utterances, dataForm.searchString, dataForm.selectedLabelClassification);
   }
 
   /**
@@ -131,9 +153,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log('clear');
   } 
 
-  _filterItems(arr, query) {
-    return arr.filter((el) => el.utterance.toLowerCase().includes(query.toLowerCase()));
+  /**
+  * Filter the dataset generated for training conversational systems with the search string.
+  */
+  _filterItems(arr, query, label) {
+    
+    let result = (query !==undefined && query.trim() !=='') ? 
+      arr.filter((el) => el.utterance.toLowerCase().includes(query.toLowerCase())) : arr;
+ 
+    result = (label !==undefined && label.trim() !=='') ? 
+      arr.filter((el) => el.labelClassification.initials.toLowerCase().includes(label.toLowerCase())) : result;
+      
+    return result;
   }
-
 
 }

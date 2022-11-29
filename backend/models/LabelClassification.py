@@ -14,3 +14,6 @@ class LabelClassification:
     
     def __dict__(self):
         return {'name': self.name, 'initials': self.initials}
+    
+    def __eq__(self, other):
+        return self.name  == other.name and self.initials == other.initials
