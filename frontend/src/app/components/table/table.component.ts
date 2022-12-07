@@ -34,10 +34,11 @@ export class TableComponent implements OnInit, OnChanges {
 
   /**
    * Life cycle hook. Called when a directive, pipe, or service is updated.
+   * 
+   * @param changes the changes to be updated
    */
   ngOnChanges(changes: SimpleChanges): void {
       //console.log(this.dataSource);
-
   }
 
 }

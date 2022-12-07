@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { LabelClassification } from 'app/models/label-classification';
 import { TrainingSet } from 'app/models/training-set';
 import { GenerateService } from 'app/services/generate.service';
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * The search to filter the data by utterance.
    */
-  searchString: string;
+  searchString: string = "";
   /**
    * The selected option to filter the data by label Classification.
    */
@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle hook. Called when a directive, pipe, or service is initialized.
+   * 
    */
   ngOnInit(): void {
     this.datasetName = "RDF-Dataset/Test/generate";
@@ -76,6 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle hook. Called when a directive, pipe, or service is destroyed.
+   * 
    */
   ngOnDestroy(): void {
     
@@ -83,6 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Loads the dataset generated for training conversational systems.
+   * 
    */
   getDataGenerated() {
     this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
@@ -102,6 +105,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Bind click event to generate dataset for training conversational systems.
+   * 
+   * @param dataForm the form data
    */
   onClickSubmit(dataForm) {
     this.numberOfSamples = dataForm.numberOfSamples;
@@ -110,6 +115,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
    /**
    * Bind click event to filter dataset for training conversational systems.
+   * 
+   * @param dataForm the form data
    */
   onClickFilterSearch(dataForm) {
     console.log(dataForm);
@@ -118,6 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Export to csv the dataset generated for training conversational systems.
+   * 
    */
   exportCSV() { 
     if(this.numberOfSamples > 0 && this.data.utterances.length > 0) {
@@ -145,6 +153,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Clear the data generated.
+   * 
    */
   clearSearch() {
     //this.data = new TrainingSet([], 0);
@@ -154,13 +163,26 @@ export class HomeComponent implements OnInit, OnDestroy {
   } 
 
   /**
+   * Scroll to the target element.
+   * 
+   * @param el target element to scroll
+   */
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
+  /**
   * Filter the dataset generated for training conversational systems with the search string.
+  * 
+  * @param arr the dataset generated for training conversational systems
+  * @param query the search string
+  * @param label the label classification
   */
   _filterItems(arr, query, label) {
     
     let result = (query !==undefined && query.trim() !=='') ? 
       arr.filter((el) => el.utterance.toLowerCase().includes(query.toLowerCase())) : arr;
- 
+    
     result = (label !==undefined && label.trim() !=='') ? 
       arr.filter((el) => el.labelClassification.initials.toLowerCase().includes(label.toLowerCase())) : result;
       
