@@ -23,7 +23,7 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right" value="submit">Go</button>
+                            <button mat-raised-button (click)="scroll(target)" type="submit" class="btn btn-info pull-right" value="submit">Go</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div  #target class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
                     <div class="card-header card-header-warning card-header-icon">
                         <div class="card-icon">
@@ -98,7 +98,7 @@
             </div>
         </div>
       
-        <app-table [dataSource]="dataAux" [columnNames]="columns"  ></app-table>
+        <app-table [dataSource]="dataAux" [columnNames]="columns"></app-table>
 
     </div>
 </div>
