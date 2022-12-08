@@ -1,0 +1,123 @@
+Albanês é falado na Albânia?
+Quais países falam esse idioma?
+Quais países falam Albanês?
+Qual é a capital da Albania?
+Qual é a capital desse país?
+Qual é a capital dele?
+Qual é a área da Albania?
+Qual é o governo da Albania
+Qual é a taxa de mortalidade infantil da Albania?
+Qual é a população total da Albania em 1991?
+O que é falado na Albania?
+Qual é o idioma da Albania?
+Tirana é a capital de qual país?
+Onde está localizada Tirana?
+Where is Tirana located?
+
+Is Albanian spoken in Albania?
+Which countries speak this language?
+Which countries speak Albanian?
+What is the capital of Albania?
+What is the capital of this country?
+What is his capital?
+What is the area of Albania?
+What is the government of Albania
+What is  infant mortality rate of Albania?
+What is the total population of Albania in 1991?
+What is spoken in Albania?
+What is the language of Albania?
+Tirana is the capital of which country?
+
+(?, r, e) =>  What r e ? / What's r e / What's r of e
+(e, r, ?) => What's is r by e?
+
+re r must be replaced by its label and e must be replaced
+by its label when it is not a literal.
+
+EXAMPLES SPARQL 
+
+prefix : <http://www.semwebtech.org/mondial/10/meta#>
+ prefix mon: <http://www.semwebtech.org/mondial/10/meta#>
+ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ select ?X ?Y
+ where {{?X rdf:type mon:Country; :name ?Y}}
+
+ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix : <http://www.semwebtech.org/mondial/10/meta#>
+ prefix mon: <http://www.semwebtech.org/mondial/10/meta#>
+ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ select ?X 
+ where { <http://www.semwebtech.org/mondial/10/countries/AL/> :name ?X} 
+
+ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix : <http://www.semwebtech.org/mondial/10/meta#>
+ prefix mon: <http://www.semwebtech.org/mondial/10/meta#>
+ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ select ?Z
+ where {  <http://www.semwebtech.org/mondial/10/countries/AL/> 
+ :hadPopulation ?X . ?X :year "1950"^^xsd:gYear . ?X :value ?Z}
+
+
+ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+ prefix : <http://www.semwebtech.org/mondial/10/meta#>
+ prefix mon: <http://www.semwebtech.org/mondial/10/meta#>
+ prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ select ?country ?Z
+ where {  
+ ?country :hadPopulation ?X . 
+  ?X :year "1950"^^xsd:gYear ; :value ?Z .
+ FILTER (?Z > 1000000)
+}
+
+
+SELECT ?pessoa ?nome
+WHERE {
+    ?pessoa rdf:type dbo:Person;
+    foaf:name ?nome.
+    FILTER(CONTAINS(?nome, "Thiago"))
+}
+
+--Traz nulos tbm, ou seja as pessoas que dá nao morreram
+SELECT ?pessoa ?dataMorte
+WHERE {
+    ?pessoa rdf:type dbo:Person.
+    OPTIONAL{ ?pessoa dbo:deathDate ?dataMorte .}
+}
+
+--Traz somente as pessoas que dá nao morreram
+SELECT ?pessoa ?dataMorte
+WHERE {
+    ?pessoa rdf:type dbo:Person.
+    FILTER(!EXISTS { ?pessoa dbo:deathDate ?dataMorte .})
+}
+
+--combinar incógnitas
+SELECT ?pessoa ?nomeCompleto
+WHERE {
+    ?pessoa rdf:type dbo:Person;
+    foaf:givenName ?nome;
+    foaf:surname ?sobrenome
+    BIND (CONCAT(?nome, " ", ?sobrenome) AS ?nomeCompleto)
+}
+
+--Limit
+SELECT ?pessoa ?nomeCompleto
+WHERE {
+    ?pessoa rdf:type dbo:Person;
+} LIMIT 10
+
+--ORDER BY
+SELECT ?pessoa ?nomeCompleto
+WHERE {
+    ?pessoa rdf:type dbo:Person;
+    foaf:givenName ?nome;
+    foaf:surname ?sobrenome
+    BIND (CONCAT(?nome, " ", ?sobrenome) AS ?nomeCompleto)
+} ORDER BY ?nomeCompleto
+
+--simple asks returns true or false
+ASK {Joao rdf:type dbo:Person . }
