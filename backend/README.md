@@ -17,6 +17,7 @@
 - Coverage v6.5
 - Pytest-cov v4.0
 - Flask-cors v3.0.10
+- RDFLib v6.2.0
 
 ### Prerequisites
 - Python 3.10.7

@@ -16,6 +16,8 @@ def hello():
 @app.route("/generate/<int:number_of_samples>")
 def generate_dataset(number_of_samples=5):
     # generate a dataset with number of samples
+    if number_of_samples > 1000:
+        number_of_samples = 1000
     g = DatasetGenerateService(number_of_samples)
     result = g.run()
     return jsonify(result)
