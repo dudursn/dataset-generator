@@ -5,8 +5,6 @@ Este trabalho foi realizado para a cadeira de Projeto Final de Programação - P
 Um programa responsável por gerar training datasets para preparar sistemas conversacionais para operar sobre em RDF datasets.
 - A que tipo de uso se destina? Em que contextos? Visando que usuários?
 
-O uso deste artefato se destina a acadêmicos ou companhias que visam implementar sistemas conversacionais sobre datasets específicos. 
-
 Para treinar um sistema conversacional de busca, são necessários datasets de treino que forneçam enunciados suficientes para treinar os classificadores. Porém, existem problemas a respeito desses datasets, tais como são poucos os disponíveis publicamente, ou não possuem uma grande quantidade de enunciados, ou são criados e rotulados manualmente por especialistas. Desse modo, o objetivo dessa aplicação é gerar de forma automática esses datasets para treinamento e ela se destina a acadêmicos ou companhias que visam implementar seus sistemas conversacionais de busca e treiná-los utilizando o dataset gerado automaticamente nesse trabalho em cima de um dataset rdf especifico, no caso o [Mondial database](https://www.dbis.informatik.uni-goettingen.de/Mondial/) em RDF, mas somente para os dados que se referem a Europa.
 
 # Documentação
