@@ -88,10 +88,14 @@ export class HomeComponent implements OnInit, OnDestroy {
    * 
    */
   getDataGenerated() {
-    this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
-      this.data = data;
-      this.dataAux = Object.assign({}, this.data);
-    });      
+    if(this.numberOfSamples==undefined){
+      alert('Please, set a value in \"Total samples to generate\".');
+    }else{
+      this.generateService.getTrainDataset(this.numberOfSamples).subscribe( (data) => {
+        this.data = data;
+        this.dataAux = Object.assign({}, this.data);
+      });    
+    } 
   }
 
    /**
@@ -184,7 +188,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       arr.filter((el) => el.utterance.toLowerCase().includes(query.toLowerCase())) : arr;
     
     result = (label !==undefined && label.trim() !=='') ? 
-      arr.filter((el) => el.labelClassification.initials.toLowerCase().includes(label.toLowerCase())) : result;
+      result.filter((el) => el.labelClassification.initials.toLowerCase().includes(label.toLowerCase())) : result;
       
     return result;
   }

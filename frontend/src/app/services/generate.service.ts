@@ -42,6 +42,7 @@ export class GenerateService {
             subscriber.next(TrainingSet.getTrainingSets(result));
           },
           error: (error) => {
+            alert('Server not respond the request. Try again later.');
             subscriber.error(error);
           },
           complete: () => {

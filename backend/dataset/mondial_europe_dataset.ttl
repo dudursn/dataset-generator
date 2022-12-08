@@ -460,7 +460,7 @@ a owl:InverseFunctionalProperty;
 
  <countries/AL/>  rdf:type :Country ;
      :name "Albania"  ;
-     :localname "ShqipÃ«ri" ;
+     :localname "Shqipëri" ;
      :carCode 'AL' ;
      :area 28750 ;
      :capital <countries/AL/cities/Tirana/> ;
