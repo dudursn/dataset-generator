@@ -159,7 +159,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     //this.data = new TrainingSet([], 0);
     this.dataAux = Object.assign({}, this.data);
     this.searchString = "";
-    console.log('clear');
+    this.selectedLabelClassification = "";
   } 
 
   /**
