@@ -3,6 +3,8 @@ import { LabelClassification } from "./label-classification";
 
 /**
  * Represents the training dataset.
+ * 
+ * @author Eduardo Nascimento
  */
 export class TrainingSet {
 

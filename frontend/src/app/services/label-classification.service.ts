@@ -7,6 +7,12 @@ import { EnvironmentService } from './environment/environment.service';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+* Class thats provides the labels classification of the utterances
+* 
+* @author Eduardo Nascimento
+*/
 export class LabelClassificationService {
 
   /**

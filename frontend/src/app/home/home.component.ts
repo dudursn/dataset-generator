@@ -12,6 +12,11 @@ import { saveAs } from 'file-saver';
   providers: [GenerateService, LabelClassificationService],
 })
 
+/**
+ * Class that controls the initial page of the application.
+ * 
+ * @author Eduardo Nascimento
+ */
 export class HomeComponent implements OnInit, OnDestroy {
 
   /**
@@ -181,6 +186,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   * @param arr the dataset generated for training conversational systems
   * @param query the search string
   * @param label the label classification
+  * @return the dataset filtered
   */
   _filterItems(arr, query, label) {
     

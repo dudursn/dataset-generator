@@ -5,6 +5,12 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
+
+/**
+ * Class that represents the table component
+ * 
+ * @author Eduardo Nascimento
+ */
 export class TableComponent implements OnInit, OnChanges {
   /**
    * Data to fill the table component

@@ -2,6 +2,8 @@ import { LabelClassification } from "./label-classification";
 
 /**
  * Represents the utterance of a training dataset.
+ * 
+ * @author Eduardo Nascimento
  */
 export class Utterance {
     /**

@@ -4,6 +4,11 @@ from models.Utterance import Utterance
 from models.LabelClassification import LabelClassification
 import core.RDFLibGenerate as RDFLibGenerate
 
+'''
+Provides the dataset for trainning.
+
+@author Eduardo Nascimento
+'''
 class DatasetGenerateService:
     
     def __init__(self, number_of_samples):

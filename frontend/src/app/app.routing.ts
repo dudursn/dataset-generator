@@ -5,6 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
+/**
+ * Component that controllers the routes.
+ * 
+ */
 const routes: Routes =[
   {
     path: '',

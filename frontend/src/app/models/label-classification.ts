@@ -1,6 +1,8 @@
 
 /**
  * Represents the label classification for a utterance.
+ * 
+ * @author Eduardo Nascimento
  */
 export class LabelClassification {
     /**

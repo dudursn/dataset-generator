@@ -1,5 +1,10 @@
 from models.LabelClassification import LabelClassification
 
+'''
+Provides the labels classifications of the utterances.
+
+@author Eduardo Nascimento
+'''
 class LabelClassificationService:
     
     def __init__(self):

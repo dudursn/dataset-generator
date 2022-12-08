@@ -1,4 +1,3 @@
-# save this as app.py
 from flask import Flask, jsonify
 from services.DatasetGenerateService import DatasetGenerateService
 from services.LabelClassificationService import LabelClassificationService

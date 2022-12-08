@@ -9,6 +9,12 @@ import { EnvironmentService } from './environment/environment.service';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * Class thats provides the dataset generated for training conversational systems
+ * 
+ * @author Eduardo Nascimento
+ */
 export class GenerateService {
 
   /**

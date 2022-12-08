@@ -16,6 +16,11 @@ export const ROUTES: RouteInfo[] = [
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
+
+/**
+ * Class that represents the sidebar component
+ * 
+ */
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 

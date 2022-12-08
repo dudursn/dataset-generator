@@ -1,5 +1,9 @@
 
+'''
+Represents the dataset for trainning.
 
+@author Eduardo Nascimento
+'''
 class TrainingSet:
     
     def __init__(self, number_of_samples):

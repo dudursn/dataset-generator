@@ -6,12 +6,18 @@ from models.TrainingSet import TrainingSet
 from models.Utterance import Utterance
 from models.LabelClassification import LabelClassification
 
+'''
+Função que gera um conjunto de amostras de treinamento a partir de um dataset RDF
+
+@param totalSamples: Quantidade de amostras que serão geradas
+return: Retorna um objeto TrainingSet com as amostras geradas
+'''
 def createTrainSet(totalSamples):
-    #Gerando o grafo a partir do dataset
+    # Gerando o grafo a partir do dataset RDF
     g = Graph()
     g.parse('backend/dataset/mondial_europe_dataset.ttl', format='ttl', encoding='utf-8')
 
-    #Importando os prefixos e criação de um novo prefixo para ser utilizado na consulta SPARQL
+    # Importando os prefixos e criação de um novo prefixo para ser utilizado na consulta SPARQL
     site = Namespace("http://www.semwebtech.org/mondial/10/meta#")
     g.bind("owl", OWL)
     g.bind("rdf", RDF)
@@ -19,12 +25,14 @@ def createTrainSet(totalSamples):
     g.bind("xsd", XSD)
     g.bind("mon", site)
 
-    #First: generate a SELF_EXPLANATORY utterance and after a not self explanatory utterance
+    # Ordem para gerar dois enunciados cada vez, primeiro o SELF_EXPLANATORY  e depois um não SELF_EXPLANATORY
     orderToGenerate = [(1,"SE"), (2,"NSE")]
+    # Pronomes que irão substituir o tópico principal no enunciado para que seja omitido
     pronoms = ("his","your")
+    #O domínio que será utilizado para gerar os enunciados
     domains = ("Country", "Organization", "City")
 
-    #All utterances possibles 
+    # Template com os padrões de enunciados que serão gerados 
     dictionaryTemplateFromData = {
         "Country":{
         "government": {"SE": "What is the government of [SUJ]?", "NSE": "What is [PRO] government?"},
@@ -48,7 +56,7 @@ def createTrainSet(totalSamples):
         }
     }
 
-    #All sparql query possibles  
+    # Consulta SPARQL que será utilizada para gerar os dados que serão substituidos nos templates dos enunciados 
     getCountry = g.query("""select ?Y  where {?X rdf:type mon:Country; mon:name ?Y }""")
     
     getCountryAndYear = g.query(""" select ?Y ?W  
@@ -75,6 +83,7 @@ def createTrainSet(totalSamples):
                                             ?Z rdf:type mon:Organization ; mon:name ?O }"""
                                         )
 
+    # Dicionario de dados cuja chave é a propriedade e o valor é a consulta SPARQL
     sparqlQueries = {
         "government":getCountry,
         "area":getCountry ,
@@ -92,7 +101,7 @@ def createTrainSet(totalSamples):
         "checkOrganization":getOrganizationAndCountry
     }
 
-    #Seleção de Templates
+    # Seleção de Templates de forma aleatória
     utterances = []
     for i in range(totalSamples):
         paragraph = str(i+1)
@@ -106,7 +115,8 @@ def createTrainSet(totalSamples):
             utterances.append([paragraph + '.'+sentence, property_selected, utterance])
             properties.remove(property_selected)
 
-    #Seleção de Conteudo
+    # Seleção de Conteudo, após a seleção dos templates, para cada template é selecionado uma consulta sparql que 
+    # será vinculado a esse template
     resultSparql = []
     finalUtterances = []
     codes = []
@@ -118,7 +128,10 @@ def createTrainSet(totalSamples):
         codes.append(code)
     
 
-    #Lexicalização e Geração de Expressão
+    # Lexicalização e Geração de Expressão
+    # Com os dados resultantes da consulta sparql e os templates, ocorre um substituição nos marcadores de posição e 
+    # depois se instancia um objeto do tipo Utterance com o enunciado gerado e o rótulo desse enunciado e
+    # por fim, adiciona-se ao TrainingSet que será utilizado para gerar o arquivo de treinamento.
     result = TrainingSet(totalSamples)
     
     for i in range(len(finalUtterances)):

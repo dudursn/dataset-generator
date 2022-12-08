@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+/**
+ * Class that represents the navbar component
+ * 
+ */
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;

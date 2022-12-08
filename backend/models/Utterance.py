@@ -1,5 +1,9 @@
 
+'''
+Represents a utterance.
 
+@author Eduardo Nascimento
+'''
 class Utterance():
     
     def __init__(self, code, utterance, label_classification):

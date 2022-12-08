@@ -1,4 +1,8 @@
+'''
+Represents the label classification of the utterance.
 
+@author Eduardo Nascimento
+'''
 class LabelClassification:
     
     def __init__(self, name, initials):

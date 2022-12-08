@@ -4,12 +4,14 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 /**
- * Environment for development.
+ * Class that represents the setting Environment for development.
+ * 
+ * @author Eduardo Nascimento
  */
  export const environment = {
   production: false,
   version: '1.0.0',
-  title: 'Dataset generator tool for training conversational systems',
+  title: 'Dataset generator tool in RDF Dataset for training information retrieval conversational systems',
   apiUrl: 'http://localhost:5000',
   database: 'Mondial',
   hasLogin: false,
