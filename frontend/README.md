@@ -6,7 +6,7 @@
     > npm install
     -- Executar sem debug
     > ng serve
-    É necessário estar com o backend rodando. Para ver como rodar, clique [aqui](../backend/README.md)
+É necessário estar com o backend rodando. Para ver como rodar, clique [aqui](../backend/README.md)
 
 ## Developing
 
