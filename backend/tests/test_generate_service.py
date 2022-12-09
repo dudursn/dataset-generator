@@ -34,13 +34,15 @@ class TestGenerate(unittest.TestCase):
         self.response = self.myApp.get('/generate')
         self.assertEqual(200, self.response.status_code)
         
-    # Testa a requisição sem passar os parâmetros, deve ser esperado a quantidade de exemplos gerados igual a 5 (default)
+    # Testa a requisição sem passar os parâmetros, deve ser esperado a quantidade de exemplos gerados igual a
+    # 5 (default)
     def test_get_without_parameter(self):
         self.response = self.myApp.get('/generate')
         data = json.loads(self.response.data.decode('utf-8'))
         self.assertEqual(5, data['total'])
 
-    # Testa a requisição passando algum parâmetro, deve ser esperado a quantidade de exemplos gerados igual ao número passado na requisição
+    # Testa a requisição passando algum parâmetro, deve ser esperado a quantidade de exemplos gerados igual ao 
+    # número passado na requisição
     def test_get_without_parameter(self):
         total_samples = 25
         self.response = self.myApp.get('/generate/'+str(total_samples))

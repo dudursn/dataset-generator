@@ -32,7 +32,8 @@ class TestHome(unittest.TestCase):
 
     # Testa se a nossa home retorna a string esperada
     def test_html_string_response(self):
-        self.assertEqual("Hello, World! - This is application is running with <b>Flask Version: 2.2.2</b>", self.response.data.decode('utf-8'))
+        self.assertEqual("Hello, World! - This is application is running with <b>Flask Version: 2.2.2</b>", 
+                         self.response.data.decode('utf-8'))
 
     # Testa se o content_type da resposta da home esta correto
     def test_content_type(self):

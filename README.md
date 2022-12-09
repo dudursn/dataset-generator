@@ -15,4 +15,4 @@ Para treinar um sistema conversacional de busca, são necessários datasets de t
 A documentação está disponível na pasta Docs/.
 
 Notas e Manual
-Demais arquivos como Manual do Usuário, descrição de tecnologias e organização da arquitetura encontram no arquivo PDF do projeto de programação final. Disponível aqui.
+Demais arquivos como Manual do Usuário, descrição de tecnologias e organização da arquitetura encontram no arquivo PDF do projeto de programação final. Disponível [aqui](docs/Projeto_de_Programacao_Eduardo_Nascimento.pdf).
