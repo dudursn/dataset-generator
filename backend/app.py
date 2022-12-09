@@ -19,11 +19,11 @@ def generate_dataset(number_of_samples=5):
         number_of_samples = 1000
     controller = DatasetGenerateController(number_of_samples)
     result = controller.generate()
-    return jsonify(result)
+    return result
 
 @app.route("/labels")
 def get_labels_classifications():
     #get all labels
     controller = LabelClassificationController()
     result = controller.get_labels_classifications()
-    return jsonify(result)
+    return result
