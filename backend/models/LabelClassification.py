@@ -11,10 +11,10 @@ class LabelClassification:
     
     
     def __repr__(self):
-        return '<LabelClassification - initials: %r, name: %r>' % (self.name, self.initials)
+        return '<LabelClassification - initials: %r, name: %r>' % (self.initials, self.name)
     
     def __str__(self):
-        return '<LabelClassification - initials: %r, name: %r>' % (self.name, self.initials)
+        return '<LabelClassification - initials: %r, name: %r>' % (self.initials, self.name)
     
     def __dict__(self):
         return {'name': self.name, 'initials': self.initials}

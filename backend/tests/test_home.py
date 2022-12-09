@@ -10,7 +10,9 @@ from app import app
 # Importa a biblioteca de testes
 import unittest
 
-
+'''
+    Test if apps is running 
+'''
 class TestHome(unittest.TestCase):
 
     '''

@@ -13,6 +13,9 @@ import unittest
 
 import json
 
+'''
+    Test if apps is generating datasets
+'''
 class TestGenerate(unittest.TestCase):
 
     '''

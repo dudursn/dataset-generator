@@ -14,6 +14,9 @@ import unittest
 
 import json
 
+'''
+    Test if apps is generating the labels correctly
+'''
 class TestLabelClassificationService(unittest.TestCase):
 
     '''
