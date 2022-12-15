@@ -1,5 +1,5 @@
 # Geração de training datasets para sistemas conversacionais de busca sobre RDF datasets
-Este trabalho foi realizado para a cadeira de Projeto Final de Programação - PUC-Rio.
+Este trabalho foi realizado para a disciplina de Projeto Final de Programação - PUC-Rio.
 - O que vai ser o projeto?
 
 Um programa responsável por gerar training datasets para preparar sistemas conversacionais para operar sobre em RDF datasets.
